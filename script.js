@@ -1,17 +1,21 @@
 console.log("Kanban JS loaded...");
 
 window.addEventListener("DOMContentLoaded", () => {
-  // Appel de la fonction asynchrone pour effectuer le tri des cartes
-  initKanban();
+  // Attache l'événement au bouton de tri par priorité
+  const sortByPriorityBtn = document.getElementById("sortByPriorityBtn");
+  sortByPriorityBtn.addEventListener("click", async () => {
+    await sortCardsByPriority();
+  });
 });
 
-async function initKanban() {
-  // Récupérer toutes les cartes
-  const allCards = document.querySelectorAll(".card");
+async function sortCardsByPriority() {
+  console.log("Tri des cartes par priorité lancé...");
+
+  // Récupérer toutes les colonnes
+  const columns = document.querySelectorAll('.column');
 
   // Fonction de tri des cartes par priorité
-  function sortCardsByPriority(cards) {
-    // Tri des cartes selon la priorité (high > medium > low)
+  function sortCards(cards) {
     return Array.from(cards).sort((cardA, cardB) => {
       const priorityA = cardA.getAttribute('data-priority');
       const priorityB = cardB.getAttribute('data-priority');
@@ -27,39 +31,18 @@ async function initKanban() {
   }
 
   // Fonction pour réorganiser les cartes dans leurs colonnes respectives
-  async function reorderCards() {
-    // Pour chaque colonne, trier et réorganiser les cartes
-    const columns = document.querySelectorAll('.column');
+  for (let column of columns) {
+    // Sélectionner toutes les cartes de la colonne
+    const cardsInColumn = column.querySelectorAll('.card');
+    
+    // Trier les cartes par priorité
+    const sortedCards = sortCards(cardsInColumn);
 
-    for (let column of columns) {
-      // Sélectionner toutes les cartes de la colonne
-      const cardsInColumn = column.querySelectorAll('.card');
-      
-      // Trier les cartes par priorité
-      const sortedCards = sortCardsByPriority(cardsInColumn);
-
-      // Réorganiser les cartes dans la colonne
-      for (let card of sortedCards) {
-        // Attendre un petit délai avant de réinsérer la carte (simulateur d'asynchrone)
-        await insertCardAsync(column, card);
-      }
+    // Réorganiser les cartes dans la colonne
+    for (let card of sortedCards) {
+      column.appendChild(card);  // Réinsérer la carte après tri
     }
   }
 
-  // Fonction simulant un délai asynchrone avant d'insérer une carte
-  function insertCardAsync(column, card) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        column.appendChild(card);  // Réinsérer la carte après un délai
-        resolve();
-      }, 200);  // Délai de 200 ms
-    });
-  }
-
-  // Appeler la fonction pour trier et réorganiser les cartes après un processus asynchrone
-  await reorderCards();
-
-  console.log("Cards reordered successfully.");
+  console.log("Cartes triées par priorité avec succès.");
 }
-
-console.log("Kanban JS loaded...");
