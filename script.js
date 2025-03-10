@@ -3,8 +3,7 @@ console.log("Kanban JS loaded...");
 //
 document.getElementById('addCardBtn').addEventListener('click', function() {
 
-    //Récupére les infos pour remplir les cartes 
-
+    //Récupérer les infos 
     const titre = prompt("Titre de la carte :");
     if (!titre) return;
 
@@ -17,6 +16,8 @@ document.getElementById('addCardBtn').addEventListener('click', function() {
 
     const colonneAFaire = document.querySelector('.column[data-status="todo"]');
 
+    //Creer la carte 
+
     const nouvelleCarte = document.createElement('div');
     nouvelleCarte.classList.add('card');
     nouvelleCarte.setAttribute('data-priority', prioriteFinale);
@@ -27,10 +28,18 @@ document.getElementById('addCardBtn').addEventListener('click', function() {
     const nouveauContenu = document.createElement('p');
     nouveauContenu.textContent = contenu;
 
+    const boutonSupprimer = document.createElement('button');
+    boutonSupprimer.textContent = 'Supprimer';
+    boutonSupprimer.addEventListener('click', function() {
+        nouvelleCarte.remove();
+    });
+
     nouvelleCarte.appendChild(nouveauTitre);
     nouvelleCarte.appendChild(nouveauContenu);
+    nouvelleCarte.appendChild(boutonSupprimer);
 
     colonneAFaire.appendChild(nouvelleCarte);
 });
+
 
 
