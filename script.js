@@ -3,20 +3,21 @@ console.log("Kanban JS loaded...");
 // Exemple éventuel de structure
 window.addEventListener("DOMContentLoaded", () => {
   // Ici, on récupère les éléments du DOM
-  const addCardBtn = document.getElementById('addCardBtn');
   const searchInput = document.getElementById('searchInput');
-  const sortByPriorityBtn = document.getElementById('sortByPriorityBtn');
-
-  // Éventuellement, on écoute les événements
-  addCardBtn.addEventListener('click', () => {
-    // ...
-  });
 
   searchInput.addEventListener('input', () => {
-    // ...
-  });
+    let inputValue = searchInput.value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
 
-  sortByPriorityBtn.addEventListener('click', () => {
-    // ...
+    cards.forEach(card => {
+      let title = card.querySelector("h3")?.textContent.toLowerCase() || "";
+      let description = card.querySelector("p")?.textContent.toLowerCase() || "";
+
+      if (title.includes(inputValue) || description.includes(inputValue)) {
+          card.classList.remove("hidden");
+      } else {
+          card.classList.add("hidden");
+      }
+    });
   });
 });
