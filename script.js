@@ -21,9 +21,9 @@ async function sortCardsByPriority() {
       const priorityB = cardB.getAttribute('data-priority');
 
       const priorityOrder = {
-        high: 1,
-        medium: 2,
-        low: 3
+        haute: 1,
+        moyenne: 2,
+        basse: 3
       };
 
       return priorityOrder[priorityA] - priorityOrder[priorityB];
