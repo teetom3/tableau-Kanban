@@ -1,13 +1,119 @@
 body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 20px;
-    background: #f9f9f9;
-  }
-  
-  h1 {
+  font-family: 'Arial', sans-serif;
+  background: #0d0d0d;
+  color: #f2f2f2;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-size: 50px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #00aaff;
+  text-shadow: 0 0 15px #00aaff, 0 0 30px #005577;
+  border-bottom: 3px solid #00aaff;
+  display: inline-block;
+  padding-bottom: 10px;
+  margin-top: 20px;
+}
+
+.banner {
+  width: 100%;
+  height: 250px;
+  background: url('https://media.istockphoto.com/id/2013321194/fr/photo/concept-de-streaming-de-donn%C3%A9es-tunnel-num%C3%A9rique-r%C3%A9alis%C3%A9-avec-des-particules-abstraites-de.jpg?s=2048x2048&w=is&k=20&c=4fXn8tR_P4EutVLU7tAwa8WBTS9l4Z1jPQctIvwCgnc=') no-repeat center center;
+  background-size: cover;
+  border-bottom: 4px solid #00aaff;
+  margin-top: 20px;
+}
+
+.kanban {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 50px;
+}
+
+.column {
+  background: rgba(20, 20, 20, 0.9);
+  padding: 20px;
+  border-radius: 15px;
+  width: 300px;
+  box-shadow: 0 4px 10px rgba(0, 170, 255, 0.5);
+  border: 2px solid rgba(0, 170, 255, 0.7);
+}
+
+.column h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  color: #00aaff;
+  border-bottom: 2px solid #00aaff;
+  padding-bottom: 5px;
+}
+
+.card {
+  background: rgba(50, 50, 50, 0.9);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0, 170, 255, 0.3);
+  transition: transform 0.3s ease-in-out, background 0.3s;
+  cursor: pointer;
+  color: #f2f2f2;
+  border-left: 4px solid #00aaff;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  background: rgba(0, 50, 100, 0.9);
+  box-shadow: 0 0 15px rgba(0, 170, 255, 0.7);
+}
+
+.toolbar {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+button {
+  background: #00aaff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  transition: transform 0.2s, background 0.3s;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background: #005577;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0, 170, 255, 0.8);
+}
+
+input[type="text"] {
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  text-align: center;
+  background: #222;
+  color: #00aaff;
+  border: 2px solid #00aaff;
     margin-bottom: 20px;
     text-align: center;
+    color: white;
   }
   
   .kanban {
@@ -35,7 +141,7 @@ body {
     margin: 10px 0;
     padding: 10px;
     border-radius: 3px;
-    cursor: grab; /* Indication pour drag & drop (optionnel) */
+    cursor: grab;
   }
   
   .toolbar {
@@ -48,3 +154,6 @@ body {
     padding: 5px 10px;
   }
   
+  .hidden {
+    display: none;
+}
