@@ -2,60 +2,63 @@ console.log("Kanban JS loaded...");
 
 window.addEventListener("DOMContentLoaded", () => {
   // Récupérer les colonnes et les cartes
-  const allColumns = document.querySelectorAll(".column");
-  const allCards = document.querySelectorAll(".card");
+  const colonnes = document.querySelectorAll(".column");
+  const cartes = document.querySelectorAll(".card");
 
   // Faire en sorte que les cartes soient draggables
-  allCards.forEach(card => {
-    card.setAttribute("draggable", "true");  // Rendre chaque carte draggable
+  cartes.forEach(carte => {
+    carte.setAttribute("draggable", "true");  // Rendre chaque carte draggable
   });
 
   // Fonction pour gérer le début du drag
-  allCards.forEach(card => {
-    card.addEventListener("dragstart", (e) => {
+  cartes.forEach(carte => {
+    carte.addEventListener("dragstart", (e) => {
       // On enregistre l'élément qui est en train d'être déplacé
-      e.dataTransfer.setData("text/plain", e.target.dataset.id);
-      e.target.style.opacity = "1";  // Effet visuel pendant le drag
+      e.dataTransfer.setData("text/plain", e.target.id);  // Utilisez l'ID de la carte pour récupérer plus facilement
+      e.target.style.opacity = "0.5";  // Effet visuel pendant le drag
     });
 
     // Réinitialiser l'opacité lorsque l'élément est relâché ou abandonné
-    card.addEventListener("dragend", (e) => {
-      e.target.style.opacity = "1";  // Rétablir l'opacité
+    carte.addEventListener("dragend", (e) => {  // Rétablir l'opacité
+      e.target.style.opacity = "1";  // Rétablir l'opacité après le drag
     });
   });
 
   // Ajouter des événements aux colonnes pour accepter les cartes glissées
-  allColumns.forEach(column => {
-    column.addEventListener("dragover", (e) => {
+  colonnes.forEach(colonne => {
+    colonne.addEventListener("dragover", (e) => {
       e.preventDefault(); // Cela permet de faire un drop
     });
 
-    column.addEventListener("dragenter", (e) => {
+    colonne.addEventListener("dragenter", (e) => {
       // Ajouter une classe visuelle pour indiquer que l'élément peut être déposé
-      column.classList.add("drag-over");
+      colonne.classList.add("drag-over");
     });
 
-    column.addEventListener("dragleave", (e) => {
+    colonne.addEventListener("dragleave", (e) => {
       // Retirer la classe visuelle
-      column.classList.remove("drag-over");
+      colonne.classList.remove("drag-over");
     });
 
-    column.addEventListener("drop", (e) => {
-      e.preventDefault();  // Empêche le comportement par défaut
+    colonne.addEventListener("drop", (e) => {
+      e.preventDefault();  // Empêche le comportement par défaut (soulève l'événement de drop)
 
       // Récupérer l'ID de la carte déplacée
-      const cardId = e.dataTransfer.getData("text/plain");
-      const card = document.querySelector(`[data-id='${cardId}']`);
+      const carteId = e.dataTransfer.getData("text/plain");
+      const carte = document.getElementById(carteId);  // Utilisez `getElementById` pour récupérer la carte
 
-      // Ajouter la carte à la colonne cible
-      column.appendChild(card);
+      // Vérifier si la carte existe avant de la déplacer
+      if (carte) {
+        // Ajouter la carte à la colonne cible
+        colonne.appendChild(carte);
 
-      // Mettre à jour le statut de la carte (la colonne dans laquelle elle se trouve)
-      const newStatus = column.getAttribute("data-status");
-      card.setAttribute("data-status", newStatus);
+        // Mettre à jour le statut de la carte (la colonne dans laquelle elle se trouve)
+        const nouveauStatus = colonne.getAttribute("data-status");  // Utiliser `colonne` ici
+        carte.setAttribute("data-status", nouveauStatus);  // Mettre à jour l'attribut de statut
+      }
 
       // Supprimer la classe visuelle de dragover
-      column.classList.remove("drag-over");
+      colonne.classList.remove("drag-over");
     });
   });
 });
@@ -101,6 +104,7 @@ document.getElementById('addCardBtn').addEventListener('click', function() {
 
     colonneAFaire.appendChild(nouvelleCarte);
 });
+
 
 
 
