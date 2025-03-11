@@ -2,7 +2,6 @@ console.log("Kanban JS loaded...");
 
 //
 
-
 function creerCarte(titre, contenu, priorite){
  if(!titre || !contenu) return null;
 
