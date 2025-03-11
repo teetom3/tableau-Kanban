@@ -84,7 +84,8 @@ document.getElementById('addCardBtn').addEventListener('click', function () {
     creerCarte(titre, contenu, priorite);
 });
 
-window.addEventListener("load", function () {
+// Charger les cartes depuis le local storage 
+window.addEventListener("load", function(){
     let cartes = JSON.parse(localStorage.getItem("cartes")) || [];
     cartes.forEach(ajouterCarteTableau);
 });
