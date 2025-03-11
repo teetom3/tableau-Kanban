@@ -30,11 +30,12 @@ function sauvegarderCarteDansLocalStorage(carte) {
 
  //Creer la carte 
  function ajouterCarteTableau(carte){
-    const colonneAFaire = document.querySelector('.column[data-status="todo"]');
+    const colonneAFaire = document.querySelector(`.column[data-status=${carte.statut}]`);
     const nouvelleCarte = document.createElement('div');
     nouvelleCarte.setAttribute('id', carte.id);
     nouvelleCarte.classList.add('card');
     nouvelleCarte.setAttribute('data-priority', carte.priorite);
+    nouvelleCarte.setAttribute('statut', carte.statut);
 
     const nouveauTitre = document.createElement('h3');
     nouveauTitre.textContent = carte.titre;
@@ -73,23 +74,13 @@ document.getElementById('addCardBtn').addEventListener('click', function() {
     if (!contenu) return;
 
     const priorite = prompt("Priorité de la carte (haute, moyenne, basse) :", "basse");
-   
-
-    
-
+  
     creerCarte(titre, contenu, priorite)
     
 });
   
-
- 
 // Charger les cartes depuis le local storage 
-
 window.addEventListener("load", function(){
     let cartes = JSON.parse(localStorage.getItem("cartes")) || [];
     cartes.forEach(ajouterCarteTableau);
 })
-
-
-
-
