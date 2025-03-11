@@ -1,13 +1,13 @@
 console.log("Kanban JS loaded...");
 
-window.addEventListener("DOMContentLoaded", () => {
-  // Attache l'événement au bouton de tri par priorité
-  const sortByPriorityBtn = document.getElementById("sortByPriorityBtn");
-  sortByPriorityBtn.addEventListener("click", async () => {
+function sort() {
+    // Attache l'événement au bouton de tri par priorité
+    const sortByPriorityBtn = document.getElementById("sortByPriorityBtn");
+    sortByPriorityBtn.addEventListener("click", async () => {
     await sortCardsByPriority();
-  });
-});
-
+    });
+};
+  
 async function sortCardsByPriority() {
   console.log("Tri des cartes par priorité lancé...");
 
