@@ -46,3 +46,5 @@ async function sortCardsByPriority() {
 
   console.log("Cartes triées par priorité avec succès.");
 }
+
+sort();
